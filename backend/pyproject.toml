@@ -1,0 +1,14 @@
+[project]
+name = "english-learning-assistant"
+version = "0.1.0"
+description = "private english learning assistant"
+readme = "README.md"
+authors = [
+    { name = "Münevver Yıldırım", email = "mnevveryldrm01@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.162.2",
+    "uvicorn[standard]>=0.54.0",
+]
+
