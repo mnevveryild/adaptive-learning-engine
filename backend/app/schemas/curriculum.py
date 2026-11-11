@@ -26,7 +26,6 @@ class LearnerProfile(BaseModel):
 
 class Unit(BaseModel):
     model_config = ConfigDict(extra="forbid")
-
     id: str = Field(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")
     title: str = Field(min_length=1)
     grammar_topic: str = Field(min_length=1)
