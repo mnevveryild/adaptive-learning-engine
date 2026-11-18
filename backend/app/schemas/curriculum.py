@@ -36,6 +36,7 @@ class Curriculum(BaseModel):
 
     units: list[Unit] = Field(min_length=1)
 
+
 class AppConfig(BaseModel):
     learner: LearnerProfile
-    curriculum: Curriculum    
+    curriculum: Curriculum

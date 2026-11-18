@@ -5,9 +5,9 @@ import yaml
 from pydantic import BaseModel, ValidationError
 
 from app.core.exceptions import ConfigError
+from app.core.paths import CONFIG_DIR
 from app.schemas.curriculum import AppConfig, Curriculum, LearnerProfile
 
-from app.core.paths import CONFIG_DIR
 
 def _read_yaml(path: Path) -> Any:
     if not path.is_file():

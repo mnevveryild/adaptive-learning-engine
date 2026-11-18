@@ -4,9 +4,7 @@ from sqlalchemy.orm import Session
 from app.db.models import GeneratedContent
 
 
-def get_or_create_content(
-    session: Session, unit_id: str, day: int, level: str
-) -> GeneratedContent:
+def get_or_create_content(session: Session, unit_id: str, day: int, level: str) -> GeneratedContent:
     existing = session.scalars(
         select(GeneratedContent).where(
             GeneratedContent.unit_id == unit_id,

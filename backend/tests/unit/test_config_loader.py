@@ -33,6 +33,7 @@ def test_real_project_config_is_valid() -> None:
 
     assert len(config.curriculum.units) >= 1
 
+
 def test_misspelled_field_is_rejected(config_dir: Path) -> None:
     (config_dir / "units.yaml").write_text(
         """\
@@ -47,7 +48,8 @@ units:
     with pytest.raises(ConfigError, match="grammar_topic"):
         load_app_config(config_dir)
 
-def test_invalid_unit_id_is_rejected(config_dir: Path)->None:
+
+def test_invalid_unit_id_is_rejected(config_dir: Path) -> None:
     (config_dir / "units.yaml").write_text(
         """\
 units:
