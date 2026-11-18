@@ -7,9 +7,7 @@ from pydantic import BaseModel, ValidationError
 from app.core.exceptions import ConfigError
 from app.schemas.curriculum import AppConfig, Curriculum, LearnerProfile
 
-# This file: backend/app/core/config_loader.py -> parents[3] = repository root
-DEFAULT_CONFIG_DIR = Path(__file__).resolve().parents[3] / "config"
-
+from app.core.paths import CONFIG_DIR
 
 def _read_yaml(path: Path) -> Any:
     if not path.is_file():
@@ -29,7 +27,7 @@ def _validate[ModelT: BaseModel](path: Path, model: type[ModelT]) -> ModelT:
         raise ConfigError(f"Invalid configuration in {path}:\n{exc}") from exc
 
 
-def load_app_config(config_dir: Path = DEFAULT_CONFIG_DIR) -> AppConfig:
+def load_app_config(config_dir: Path = CONFIG_DIR) -> AppConfig:
     return AppConfig(
         learner=_validate(config_dir / "learner.yaml", LearnerProfile),
         curriculum=_validate(config_dir / "units.yaml", Curriculum),

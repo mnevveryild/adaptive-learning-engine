@@ -29,7 +29,7 @@ def config_dir(tmp_path: Path) -> Path:
     return tmp_path
 
 @pytest.fixture
-def client(config_dir: Path) -> Iterator[TestClient]:
-  app = create_app(config_dir)
+def client(config_dir: Path, tmp_path: Path) -> Iterator[TestClient]:
+  app = create_app(config_dir, database_path= tmp_path / "test.db")
   with TestClient(app) as test_client:
     yield test_client

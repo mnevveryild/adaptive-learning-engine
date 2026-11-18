@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from app.core.config_loader import DEFAULT_CONFIG_DIR, load_app_config
+from app.core.config_loader import CONFIG_DIR, load_app_config
 from app.core.exceptions import ConfigError
 from app.schemas.curriculum import CEFRLevel
 
@@ -29,7 +29,7 @@ def test_invalid_level_is_rejected(config_dir: Path) -> None:
 
 
 def test_real_project_config_is_valid() -> None:
-    config = load_app_config(DEFAULT_CONFIG_DIR)
+    config = load_app_config(CONFIG_DIR)
 
     assert len(config.curriculum.units) >= 1
 
