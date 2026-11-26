@@ -1,0 +1,122 @@
+# doğru cümlelerin bazıları bilerek zor seçildi, yapılar yanlış görülebilir ama doğru False Positive leri yakalamak için yaptık.
+#informal cümleler var öneri yapılabilir.
+#sıklıkla yapılan hatalar var 
+
+# --- Correct sentences: the model must NOT report errors ---
+- id: correct-present-perfect
+  sentence: "I have lived in Istanbul for five years."
+  expected_has_errors: false
+
+- id: correct-neither-singular
+  sentence: "Neither of my friends is coming tonight."
+  expected_has_errors: false
+
+- id: correct-second-conditional
+  sentence: "If I were you, I would take the job."
+  expected_has_errors: false
+
+- id: correct-present-perfect-continuous
+  sentence: "She has been working here since 2020."
+  expected_has_errors: false
+
+- id: correct-used-to-ing
+  sentence: "I'm used to waking up early."
+  expected_has_errors: false
+
+- id: correct-there-are
+  sentence: "There are a lot of people in the park."
+  expected_has_errors: false
+
+# --- Informal but correct: suggestion is fine, error is NOT ---
+- id: informal-gonna
+  sentence: "I'm gonna visit my grandma this weekend."
+  expected_has_errors: false
+
+- id: informal-wanna
+  sentence: "I wanna learn English faster."
+  expected_has_errors: false
+
+# --- Sentences with errors (many are typical for Turkish learners) ---
+- id: error-past-tense-irregular
+  sentence: "Yesterday I go to the market and buyed three apple."
+  expected_has_errors: true
+  expected_error_spans: ["go", "buyed", "apple"]
+
+- id: error-third-person-dont
+  sentence: "She don't like coffee."
+  expected_has_errors: true
+  expected_error_spans: ["don't"]
+
+- id: error-am-agree
+  sentence: "I am agree with you."
+  expected_has_errors: true
+  expected_error_spans: ["am"]
+
+- id: error-missing-article
+  sentence: "I am student."
+  expected_has_errors: true
+  expected_error_spans: ["student"]
+
+- id: error-have-age
+  sentence: "I have 25 years old."
+  expected_has_errors: true
+  expected_error_spans: ["have"]
+
+- id: error-pronoun-gender
+  sentence: "My sister is a teacher and he loves her job."
+  expected_has_errors: true
+  expected_error_spans: ["he"]
+
+- id: error-didnt-went
+  sentence: "I didn't went to school yesterday."
+  expected_has_errors: true
+  expected_error_spans: ["went"]
+
+- id: error-said-me
+  sentence: "He said me that he was tired."
+  expected_has_errors: true
+  expected_error_spans: ["said"]
+
+- id: error-people-is
+  sentence: "People is very friendly here."
+  expected_has_errors: true
+  expected_error_spans: ["is"]
+
+- id: error-more-better
+  sentence: "This is more better than the old one."
+  expected_has_errors: true
+  expected_error_spans: ["more"]
+
+# --- Harder cases ---
+- id: correct-news-singular
+  sentence: "The news is good today."
+  expected_has_errors: false
+
+- id: correct-been-to
+  sentence: "I have been to London twice."
+  expected_has_errors: false
+
+- id: error-own-sentence-enter-job
+  sentence: "i will be entered a job this year(2026)"
+  expected_has_errors: true
+  expected_error_spans: ["i", "entered"]
+
+- id: error-interesting-interested
+  sentence: "I am interesting in music."
+  expected_has_errors: true
+  expected_error_spans: ["interesting"]
+
+- id: error-look-forward-to-ing
+  sentence: "I look forward to hear from you."
+  expected_has_errors: true
+  expected_error_spans: ["hear"]
+
+- id: error-married-with
+  sentence: "He is married with a doctor."
+  expected_has_errors: true
+  expected_error_spans: ["with"]
+
+- id: error-everybody-are
+  sentence: "Everybody are happy at the party."
+  expected_has_errors: true
+  expected_error_spans: ["are"]
