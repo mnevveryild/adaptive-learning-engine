@@ -12,7 +12,6 @@ def make_issue(original: str, correction: str, issue_type: IssueType = "error") 
     )
 
 
-
 def make_feedback(*issues: SentenceIssue) -> SentenceFeedback:
     return SentenceFeedback(issues=list(issues), corrected_sentence="unused in these tests")
 

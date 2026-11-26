@@ -1,10 +1,10 @@
 from openai import OpenAI
 
 from app.core.exceptions import LLMResponseError
-from app.schemas.curriculum import FeedbackLanguage,LearnerProfile
+from app.schemas.curriculum import FeedbackLanguage, LearnerProfile
 from app.schemas.feedback import SentenceFeedback
 
-PROMPT_VERSION ="sentence-feedback-v3"
+PROMPT_VERSION = "sentence-feedback-v3"
 
 LANGUAGE_NAMES = {
     FeedbackLanguage.TURKISH: "Turkish",
@@ -43,17 +43,19 @@ Bad issue (never do this):
 - one issue whose original is the whole sentence and which fixes everything at once
 """
 
+
 class FeedbackService:
-    def __init__(self,client:OpenAI,model:str) -> None:
-        self._client =client
+    def __init__(self, client: OpenAI, model: str) -> None:
+        self._client = client
         self._model = model
-    def check_sentence(self, sentence:str, learner: LearnerProfile) -> SentenceFeedback:
+
+    def check_sentence(self, sentence: str, learner: LearnerProfile) -> SentenceFeedback:
         instructions = SENTENCE_FEEDBACK_INSTRUCTIONS.format(
-            level = learner.level.value,
-            language =LANGUAGE_NAMES[learner.feedback_language],
+            level=learner.level.value,
+            language=LANGUAGE_NAMES[learner.feedback_language],
         )
         response = self._client.responses.parse(
-            model = self._model,
+            model=self._model,
             instructions=instructions,
             input=sentence,
             text_format=SentenceFeedback,
@@ -61,7 +63,8 @@ class FeedbackService:
         if response.output_parsed is None:
             raise LLMResponseError("The model did not return a valid sentence feedback.")
         return remove_invalid_issues(response.output_parsed, sentence)
-    
+
+
 def _normalize(text: str) -> str:
     return text.replace("\u2019", "'").strip()
 

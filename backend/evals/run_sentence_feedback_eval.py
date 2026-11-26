@@ -3,6 +3,7 @@
 Run from /backend:  uv run python -m evals.run_sentence_feedback_eval
 Note: this calls the real LLM, so it costs (a little) money.
 """
+
 import re
 from pathlib import Path
 
@@ -16,18 +17,22 @@ from app.services.feedback_service import PROMPT_VERSION, FeedbackService
 
 CASES_FILE = Path(__file__).parent / "sentence_feedback_cases.yaml"
 
+
 class EvalCase(BaseModel):
     id: str
     sentence: str
-    expected_has_errors:bool
+    expected_has_errors: bool
     expected_error_spans: list[str] = []
+
 
 def load_cases() -> list[EvalCase]:
     data = yaml.safe_load(CASES_FILE.read_text(encoding="utf-8"))
     return [EvalCase.model_validate(item) for item in data]
 
+
 def contains_word(text: str, word: str) -> bool:
     return re.search(rf"\b{re.escape(word)}\b", text, re.IGNORECASE) is not None
+
 
 def main() -> None:
     settings = Settings()

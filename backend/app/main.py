@@ -10,6 +10,8 @@ from app.core.config_loader import load_app_config
 from app.core.paths import CONFIG_DIR, DATABASE_PATH
 from app.db.session import create_db_engine
 
+from app.api.routes import content, feedback, health, units
+
 
 def create_app(config_dir: Path = CONFIG_DIR, database_path: Path = DATABASE_PATH) -> FastAPI:
     @asynccontextmanager
@@ -27,6 +29,7 @@ def create_app(config_dir: Path = CONFIG_DIR, database_path: Path = DATABASE_PAT
     app.include_router(health.router)
     app.include_router(units.router)
     app.include_router(content.router)
+    app.include_router(feedback.router)
     return app
 
 
